@@ -11,32 +11,32 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 
 private val LightColorScheme = lightColorScheme(
-    primary = RedLight,
-    onPrimary = RedOn,
-    primaryContainer = RedPrimaryContainer,
-    onPrimaryContainer = RedOnPrimaryContainer,
-    secondary = RedSecondary,
-    secondaryContainer = RedSecondaryContainer,
-    onSecondaryContainer = RedOnSecondaryContainer,
-    background = RedBackground,
-    onBackground = RedOnBackground,
-    surface = RedSurface,
-    onSurface = RedOnSurface
+    primary = GreenLight,
+    onPrimary = GreenOn,
+    primaryContainer = GreenPrimaryContainer,
+    onPrimaryContainer = GreenOnPrimaryContainer,
+    secondary = GreenSecondary,
+    secondaryContainer = GreenSecondaryContainer,
+    onSecondaryContainer = GreenOnSecondaryContainer,
+    background = GreenBackground,
+    onBackground = GreenOnBackground,
+    surface = GreenSurface,
+    onSurface = GreenOnSurface
 
 )
 
 private val DarkColorScheme = darkColorScheme(
-    primary = RedDark,
-    onPrimary = RedOn,
-    primaryContainer = RedDarkPrimaryContainer,
-    onPrimaryContainer = RedDarkOnPrimaryContainer,
-    secondary = RedSecondary,
-    secondaryContainer = RedDarkSecondaryContainer,
-    onSecondaryContainer = RedDarkOnSecondaryContainer,
-    background = RedDarkBackground,
-    onBackground = RedDarkOnBackground,
-    surface = RedSurfaceDark,
-    onSurface = RedOnSurfaceDark
+    primary = GreenDark,
+    onPrimary = GreenOn,
+    primaryContainer = GreenDarkPrimaryContainer,
+    onPrimaryContainer = GreenDarkOnPrimaryContainer,
+    secondary = GreenSecondary, // bisa juga pakai GreenDarkSecondaryContainer kalau mau lebih kontras
+    secondaryContainer = GreenDarkSecondaryContainer,
+    onSecondaryContainer = GreenDarkOnSecondaryContainer,
+    background = GreenDarkBackground,
+    onBackground = GreenDarkOnBackground,
+    surface = GreenSurfaceDark,
+    onSurface = GreenOnSurfaceDark
 
 )
 

@@ -36,17 +36,12 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            var isDarkTheme by rememberSaveable { mutableStateOf(false) }
-
-            ShoppingListTheme(darkTheme = isDarkTheme, dynamicColor = false) {
+            ShoppingListTheme(dynamicColor = false) {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    ShoppingListApp(
-                        isDarkTheme = isDarkTheme,
-                        onToggleTheme = { isDarkTheme = !isDarkTheme }
-                    )
+                    ShoppingListApp()
                 }
             }
         }
@@ -54,7 +49,7 @@ class MainActivity : ComponentActivity() {
 }
 
     @Composable
-    fun ShoppingListApp(isDarkTheme: Boolean, onToggleTheme: () -> Unit) {
+    fun ShoppingListApp() {
         var newItemText by rememberSaveable { mutableStateOf("") }
         var searchQuery by rememberSaveable { mutableStateOf("") }
         val shoppingItems = remember { mutableStateListOf<String>() }
@@ -105,9 +100,6 @@ class MainActivity : ComponentActivity() {
     @Composable
     fun GreetingPreview() {
         ShoppingListTheme {
-            ShoppingListApp(
-                isDarkTheme = false,
-                onToggleTheme = {}
-            )
+            ShoppingListApp()
         }
     }

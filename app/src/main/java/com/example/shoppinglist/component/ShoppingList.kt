@@ -3,6 +3,9 @@ package com.example.shoppinglist.component
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.fadeIn
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -25,24 +28,49 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.delay
 
 @Composable
 fun ShoppingList(items: List<String>) {
-    Column {
-        items.forEach { item ->
-            AnimatedVisibility(visible = true) {
-                ShoppingListItem(itemName = item)
-            }
-            Spacer(modifier = Modifier.height(8.dp))
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(horizontal = 16.dp),
+        contentPadding = PaddingValues(vertical = 12.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        items(items, key = { it }) { item ->
+            AnimatedShoppingListItem(item = item)
         }
+    }
+}
+
+@Composable
+fun AnimatedShoppingListItem(item: String) {
+    var isVisible by remember { mutableStateOf(false) }
+
+    // Trigger animasi saat item baru muncul
+    LaunchedEffect(item) {
+        delay(100)
+        isVisible = true
+    }
+
+    AnimatedVisibility(
+        visible = isVisible,
+        enter = fadeIn(animationSpec = tween(600)) +
+                expandVertically(animationSpec = tween(600))
+    ) {
+        ShoppingListItem(item)
     }
 }
 
@@ -53,33 +81,47 @@ fun ShoppingListItem(itemName: String) {
 
     val backgroundColor by animateColorAsState(
         targetValue = if (clicked) {
-            MaterialTheme.colorScheme.secondaryContainer
+            MaterialTheme.colorScheme.primaryContainer
         } else {
             MaterialTheme.colorScheme.surface
         },
-        label = "cardColor"
+        animationSpec = tween(300),
+        label = "backgroundColor"
     )
-
+    val contentColor by animateColorAsState(
+        targetValue = if (clicked) {
+            MaterialTheme.colorScheme.onPrimaryContainer // hijau tua
+        } else {
+            MaterialTheme.colorScheme.onSurface
+        },
+        animationSpec = tween(300),
+        label = "contentColor"
+    )
     val elevation by animateDpAsState(
         targetValue = if (clicked) 8.dp else 2.dp,
+        animationSpec = tween(200),
         label = "cardElevation"
     )
 
     Card(
         modifier = Modifier
             .fillMaxWidth()
+            .shadow(elevation, RoundedCornerShape(12.dp), clip = false)
             .clickable { clicked = !clicked },
-        elevation = CardDefaults.cardElevation(
-            defaultElevation = if (clicked) 8.dp else 2.dp
-        ),
+        shape = RoundedCornerShape(12.dp),
         colors = CardDefaults.cardColors(
-            containerColor = if (clicked) MaterialTheme.colorScheme.secondaryContainer
-            else MaterialTheme.colorScheme.surface
-        )
+            containerColor = backgroundColor,
+            contentColor = contentColor
+        ),
+        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
+        border = CardDefaults.outlinedCardBorder(enabled = true)
     ) {
         Row(
-            modifier = Modifier.padding(16.dp),
-            horizontalArrangement = Arrangement.Start
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Icon(
                 imageVector = Icons.Default.ShoppingCart,

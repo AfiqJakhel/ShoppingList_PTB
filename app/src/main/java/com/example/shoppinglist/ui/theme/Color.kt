@@ -2,28 +2,31 @@ package com.example.shoppinglist.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val RedLight = Color(0xFFF44336)
-val RedDark = Color(0xFFD32F2F)
-val RedOn = Color(0xFFFFFFFF)
-val RedBackground = Color(0xFFF5F5F5)
-val RedOnBackground = Color(0xFF1C1B1F)
-val RedSurface = Color(0xFFFFFFFF)
-val RedOnSurface = Color(0xFF1C1B1F)
+val GreenLight = Color(0xFF4CAF50)
+val GreenOn = Color(0xFFFFFFFF)
+val GreenPrimaryContainer = Color(0xFFC8E6C9)
+val GreenOnPrimaryContainer = Color(0xFF1B5E20)
 
-val RedSurfaceDark = Color(0xFF2B2930)
-val RedOnSurfaceDark = Color(0xFFE6E1E5)
+val GreenSecondary = Color(0xFF8BC34A)
+val GreenSecondaryContainer = Color(0xFFE6F4EA)
+val GreenOnSecondaryContainer = Color(0xFF2E7D32)
 
-val RedSecondary = Color(0xFFFF5722)
-val RedSecondaryContainer = Color(0xFFFFE0DB)
-val RedOnSecondaryContainer = Color(0xFF8C2318)
+val GreenBackground = Color(0xFFF1F8E9)
+val GreenOnBackground = Color(0xFF1C1B1F)
 
-val RedPrimaryContainer = Color(0xFFFFDAD6)
-val RedOnPrimaryContainer = Color(0xFF410E0B)
+val GreenSurface = Color(0xFFFFFFFF)
+val GreenOnSurface = Color(0xFF1C1B1F)
 
-// Warna untuk dark mode
-val RedDarkBackground = Color(0xFF121212)
-val RedDarkOnBackground = Color(0xFFFFFFFF)
-val RedDarkPrimaryContainer = Color(0xFF93000A)
-val RedDarkOnPrimaryContainer = Color(0xFFFFDAD6)
-val RedDarkSecondaryContainer = Color(0xFF8C2318)
-val RedDarkOnSecondaryContainer = Color(0xFFFFDAD6)
+
+val GreenDark = Color(0xFF388E3C)
+val GreenDarkPrimaryContainer = Color(0xFF1B5E20)
+val GreenDarkOnPrimaryContainer = Color(0xFFC8E6C9)
+
+val GreenDarkSecondaryContainer = Color(0xFF33691E)
+val GreenDarkOnSecondaryContainer = Color(0xFFDCE775)
+
+val GreenDarkBackground = Color(0xFF121212)
+val GreenDarkOnBackground = Color(0xFFE6E1E5)
+
+val GreenSurfaceDark = Color(0xFF1E1E1E)
+val GreenOnSurfaceDark = Color(0xFFE6E1E5)
