@@ -131,26 +131,26 @@ fun MainScreen() {
                 enterTransition = {
                     slideIntoContainer(
                         AnimatedContentTransitionScope.SlideDirection.Left,
-                        animationSpec = tween(400)
-                    ) + fadeIn(animationSpec = tween(400))
+                        animationSpec = tween(500)
+                    ) + fadeIn(animationSpec = tween(500))
                 },
                 exitTransition = {
                     slideOutOfContainer(
                         AnimatedContentTransitionScope.SlideDirection.Left,
-                        animationSpec = tween(400)
-                    ) + fadeOut(animationSpec = tween(400))
+                        animationSpec = tween(500)
+                    ) + fadeOut(animationSpec = tween(500))
                 },
                 popEnterTransition = {
                     slideIntoContainer(
                         AnimatedContentTransitionScope.SlideDirection.Right,
-                        animationSpec = tween(400)
-                    ) + fadeIn(animationSpec = tween(400))
+                        animationSpec = tween(500)
+                    ) + fadeIn(animationSpec = tween(500))
                 },
                 popExitTransition = {
                     slideOutOfContainer(
                         AnimatedContentTransitionScope.SlideDirection.Right,
-                        animationSpec = tween(400)
-                    ) + fadeOut(animationSpec = tween(400))
+                        animationSpec = tween(500)
+                    ) + fadeOut(animationSpec = tween(500))
                 }
             ) {
                 composable(Screen.Home.route) { ShoppingListApp() }
