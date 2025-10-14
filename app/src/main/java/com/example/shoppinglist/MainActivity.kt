@@ -159,7 +159,7 @@ fun MainScreen() {
             ) {
                 composable(Screen.Home.route) { ShoppingListApp(navController) }
                 composable(Screen.Profile.route) { ProfileScreen() }
-                composable(Screen.Setting.route) { SettingScreen() }
+                composable(Screen.Setting.route) { SettingScreen(navController) }
                 composable(Screen.DetailItem.route, listOf(navArgument("itemName") { defaultValue = "" })
                 ) { backStackEntry -> val itemName = backStackEntry.arguments?.getString("itemName") ?: ""
                     DetailItemScreen(itemName)

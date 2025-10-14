@@ -28,12 +28,13 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material3.DividerDefaults
 import androidx.compose.material3.HorizontalDivider
+import androidx.navigation.NavController
 
 
 data class SettingOption(val icon: androidx.compose.ui.graphics.vector.ImageVector, val title: String)
 
 @Composable
-fun SettingScreen() {
+fun SettingScreen(navController: NavController) {
     val options = listOf(
         SettingOption(Icons.Default.Person, "Profile"),
         SettingOption(Icons.Default.Notifications, "Notifications"),
@@ -52,7 +53,11 @@ fun SettingScreen() {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .clickable { }
+                    .clickable {
+                        when (option.title){
+                            "Profile" -> navController.navigate(Screen.Profile.route)
+                        }
+                    }
                     .padding(vertical = 12.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {

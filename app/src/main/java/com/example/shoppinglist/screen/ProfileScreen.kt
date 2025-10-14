@@ -15,6 +15,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -28,6 +29,8 @@ import com.example.shoppinglist.R
 
 @Composable
 fun ProfileScreen() {
+    val textColor = MaterialTheme.colorScheme.onSurface // Otomatis: putih di dark theme, hitam di light theme
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -59,7 +62,7 @@ fun ProfileScreen() {
                 Box(
                     modifier = Modifier
                         .background(
-                            color = Color(0xFFFFE0DB),
+                            color = MaterialTheme.colorScheme.primaryContainer,
                             shape = RoundedCornerShape(20.dp)
                         )
                         .padding(20.dp)
@@ -69,11 +72,11 @@ fun ProfileScreen() {
                         modifier = Modifier.fillMaxWidth()
                     ) {
                         Column(modifier = Modifier.padding(16.dp)) {
-                            Text("Nama: Muhammad Afiq Jakhel")
-                            Text("NIM: 2311523011")
-                            Text("TTL: Padang, 27 Oktober 2005")
-                            Text("Hobi: Gaming, Jogging")
-                            Text("Peminatan: Web Developer & FE Developer")
+                            Text("Nama: Muhammad Afiq Jakhel", color = textColor)
+                            Text("NIM: 2311523011", color = textColor)
+                            Text("TTL: Padang, 27 Oktober 2005", color = textColor)
+                            Text("Hobi: Gaming, Jogging", color = textColor)
+                            Text("Peminatan: Web Developer & FE Developer", color = textColor)
                         }
                     }
                 }
