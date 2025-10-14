@@ -17,8 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun ItemInput(text: String, onTextChange: (String) -> Unit, onAddItem:
-    () -> Unit) {
+fun ItemInput(text: String, onTextChange: (String) -> Unit, onAddItem: () -> Unit) {
     Row(
         modifier = Modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically

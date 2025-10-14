@@ -38,7 +38,6 @@ import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -47,13 +46,18 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.shoppinglist.component.ItemInput
 import com.example.shoppinglist.component.SearchInput
 import com.example.shoppinglist.component.ShoppingList
+import com.example.shoppinglist.component.ShoppingListViewModel
 import com.example.shoppinglist.component.Title
+import com.example.shoppinglist.screen.DetailItemScreen
 import com.example.shoppinglist.screen.ProfileScreen
 import com.example.shoppinglist.screen.Screen
 import com.example.shoppinglist.screen.SettingScreen
@@ -153,9 +157,13 @@ fun MainScreen() {
                     ) + fadeOut(animationSpec = tween(500))
                 }
             ) {
-                composable(Screen.Home.route) { ShoppingListApp() }
+                composable(Screen.Home.route) { ShoppingListApp(navController) }
                 composable(Screen.Profile.route) { ProfileScreen() }
                 composable(Screen.Setting.route) { SettingScreen() }
+                composable(Screen.DetailItem.route, listOf(navArgument("itemName") { defaultValue = "" })
+                ) { backStackEntry -> val itemName = backStackEntry.arguments?.getString("itemName") ?: ""
+                    DetailItemScreen(itemName)
+                }
             }
         }
     }
@@ -187,13 +195,13 @@ fun BottomNavigationBar(navController: androidx.navigation.NavHostController) {
 
 
 @Composable
-fun ShoppingListApp() {
+fun ShoppingListApp(navController: NavController,viewModel: ShoppingListViewModel = viewModel()) {
     // State for the text in the new item input field
     var newItemText by rememberSaveable { mutableStateOf("") }
     // State for the text in the search input field
     var searchQuery by rememberSaveable { mutableStateOf("") }
     // State for the list of shopping items
-    val shoppingItems = remember { mutableStateListOf<String>() }
+    val shoppingItems = viewModel.items
 
     // A derived state that automatically updates when searchQuery or shoppingItems change
     val filteredItems by remember(searchQuery, shoppingItems) {
@@ -219,7 +227,7 @@ fun ShoppingListApp() {
             onTextChange = { newItemText = it },
             onAddItem = {
                 if (newItemText.isNotBlank()) {
-                    shoppingItems.add(newItemText)
+                    viewModel.addItem(newItemText)
                     newItemText = "" // Clear the input field after adding
                 }
             }
@@ -230,7 +238,9 @@ fun ShoppingListApp() {
             onQueryChange = { searchQuery = it }
         )
         Spacer(modifier = Modifier.height(16.dp))
-        ShoppingList(items = filteredItems)
+        ShoppingList(items = filteredItems,
+            onDeleteItem = { item -> viewModel.deleteItem(item)},
+            navController = navController)
     }
 }
 
@@ -238,6 +248,7 @@ fun ShoppingListApp() {
 @Composable
 fun ShoppingListAppPreview() {
     ShoppingListTheme {
-        ShoppingListApp()
+        val navController = rememberNavController()
+        ShoppingListApp(navController = navController)
     }
 }
