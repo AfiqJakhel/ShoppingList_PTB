@@ -38,7 +38,7 @@ fun DetailItemScreen(itemName: String) {
         Spacer(modifier = Modifier.height(16.dp))
 
         Text(
-            text = "Deskripsi singkat barang bisa ditampilkan di sini.",
+            text = "Barang ini namanya adalah $itemName, deskripsi lain bisa ditambahkan",
             style = MaterialTheme.typography.bodyMedium
         )
     }
